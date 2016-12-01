@@ -1,1 +1,1 @@
-# log4g
+# simply copy of log4j
