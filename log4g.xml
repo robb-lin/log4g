@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<log4g>
+  <!-- 1、ConversionPattern 注解
+       a、%c 显示logger调用者
+       b、%d 显示日志记录时间 %d{yyyy/MM/dd HH:mm:ss,SSS}	2005/10/12 22:23:30,117
+       c、%f 显示调用logger的文件
+       d、%l 显示调用logger的代码行
+       e、%m 显示输出信息
+       f、%n 换行符
+       g、%p 日志级别
+       i、%%  显示一个百分号
+       2、该版本，每个标示只能出现一次，多出现的不处理
+  -->
+  <appender name="myConsole" class="ConsoleAppender">
+    <layout class="PatternLayout">
+      <param name="ConversionPattern"  value="[%d{yyyy/MM/dd HH:mm:ss,SSS} %p] %c:%l - %m%n" />
+    </layout>
+  </appender>
+
+  <appender name="myConsole2" class="ConsoleAppender">
+    <layout class="SimpleLayout"/>
+  </appender>
+
+  <!--
+   RollingFileAppender 可配参数
+     name		    // appender的名字
+	layout		    //layout 引用
+	// ========= 属性 =======
+	File     	    // 设置日志输出文件名
+	Append          // 设置是否在重新启动服务时，在原有日志的基础添加新日志, 默认true
+	BufferedIO      // 设置是否支持缓存，false则实时输出到文件，默认false
+	BufferSize      // 如果设置了缓存，那么缓存的大小（defautl 8192）, 单位byte
+	MaxBackupIndex  // 最大备份文件数,默认10
+    MaxFileSize     // 后缀可以是KB, MB 或者GB。在日志文件到达该大小时，将会自动滚动，即将原来的内容移到logging.log4j.1文件中，默认100KB
+   -->
+  <!--<appender name="myRollingFile" class="RollingFileAppender">-->
+    <!--<layout class="SimpleLayout"/>-->
+    <!--<param name="File" value="D:/data/gologs/output.log" />&lt;!&ndash; 设置日志输出文件名 &ndash;&gt;-->
+    <!--<param name="Append" value="true" />-->
+    <!--<param name="BufferedIO" value="true" />-->
+    <!--<param name="BufferSize" value="102400" />-->
+    <!--<param name="MaxBackupIndex" value="10" />-->
+    <!--<param name="MaxFileSize" value="1MB" />-->
+  <!--</appender>-->
+
+  <!--
+  DailyRollingFileAppender 可配参数
+    name		    // appender的名字
+   layout		    //layout 引用
+   // ========= 属性 =======
+   File     	   // 设置日志输出文件名
+   Append          // 设置是否在重新启动服务时，在原有日志的基础添加新日志, 默认true
+   BufferedIO      // 设置是否支持缓存，false则实时输出到文件，默认false
+   BufferSize      // 如果设置了缓存，那么缓存的大小（defautl 8192）, 单位byte
+   DatePattern     // 日期正则表达式，和log4j不一样，无需''标示分隔符, 仅能定义到小时级别HH
+  -->
+  <appender name="myDailyFile" class="DailyRollingFileAppender">
+    <layout class="SimpleLayout"/>
+    <param name="File" value="D:/data/gologs/dailyout.log" />
+    <param name="Append" value="true" />
+    <param name="BufferedIO" value="false" />
+    <param name="BufferSize" value="102400" />
+    <!-- 与log4j不一样，无需‘’标示分隔符 ‘.’yyyy-MM-dd 直接写成 .yyyy-MM-dd -->
+    <param name="DatePattern" value=".yyyy-MM-dd-HH" />
+  </appender>
+
+  <!-- 指定logger的设置，additivity指示是否遵循缺省的继承机制（默认为true）, 输出级别默认debug-->
+  <logger name="test_logger" additivity="true">
+    <priority>info</priority>
+    <appender-ref>myDailyFile</appender-ref>
+  </logger>
+
+  <!-- 根logger的设置-->
+  <root>
+    <priority>debug</priority>
+    <appender-ref>myConsole</appender-ref>
+  </root>
+</log4g>
