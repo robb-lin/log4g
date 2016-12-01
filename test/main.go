@@ -13,8 +13,8 @@ import (
 )
 
 func main() {
-	testAny();
-	//testLogger()
+	//testAny();
+	testLogger()
 	//testDailyLogger()
 	//testSignal()
 	//os.Rename("D:/data/gologs/dailyout.test", "D:/data/gologs/dailyout.test1")
@@ -58,27 +58,8 @@ func testRollingLogger() {
 }
 
 func testLogger() {
-	var wg sync.WaitGroup
-	fmt.Println(time.Now())
-	logger, _ := log4g.GetLogger("test_logger")
-	for t := 0; t < 50 ; t++ {
-		wg.Add(1)
-		go func() {
-			//defer wg.Add(-1)
-			defer wg.Done()
-			for i := 0; i < 1000; i++ {
-				logger.Info(fmt.Sprintf("%s%d", "sdfsd", i))  // 输出
-			}
-		}()
-	}
-
-	wg.Wait()
-
-	//logger, _ := log4g.GetLogger("test_logger")
-	//logger.Info(fmt.Sprintf("%s%d", "sdfsd", 100))  // 输出
-
-	log4g.FlushAll()
-	fmt.Println("End: ", time.Now())
+	logger := log4g.GetRootLogger()
+	logger.Info(fmt.Sprintf("%s%d", "abscsd", 12345))
 }
 
 func testAny() {

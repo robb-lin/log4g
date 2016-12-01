@@ -58,8 +58,8 @@
     <layout class="SimpleLayout"/>
     <param name="File" value="D:/data/gologs/dailyout.log" />
     <param name="Append" value="true" />
-    <param name="BufferedIO" value="false" />
-    <param name="BufferSize" value="102400" />
+    <!--<param name="BufferedIO" value="false" />-->
+    <!--<param name="BufferSize" value="102400" />-->
     <!-- 与log4j不一样，无需‘’标示分隔符 ‘.’yyyy-MM-dd 直接写成 .yyyy-MM-dd -->
     <param name="DatePattern" value=".yyyy-MM-dd-HH" />
   </appender>
