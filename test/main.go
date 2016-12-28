@@ -59,7 +59,10 @@ func testRollingLogger() {
 
 func testLogger() {
 	logger := log4g.GetRootLogger()
+	logger.Debug(fmt.Sprintf("%s%d", "abscsd", 12345))
 	logger.Info(fmt.Sprintf("%s%d", "abscsd", 12345))
+	logger.Warn(fmt.Sprintf("%s%d", "abscsd", 12345))
+	logger.Error(fmt.Sprintf("%s%d", "abscsd", 12345))
 }
 
 func testAny() {
